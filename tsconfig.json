@@ -1,1 +1,0 @@
-{"compilerOptions":{"target":"es5","experimentalDecorators":true,"extendedDiagnostics":true,"isolatedModules":true,"newLine":"lf","noErrorTruncation":true,"noImplicitAny":true,"noUnusedLocals":true,"pretty":true},"include":["./src/**/*"]}

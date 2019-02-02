@@ -12,7 +12,6 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'ts-loader', exclude: /node_modules/ },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
         test: /\.less/, use: [
@@ -22,9 +21,6 @@ module.exports = {
         ]
       }
     ]
-  },
-  resolve: {
-    extensions: ['.js', '.ts', '.d.ts']
   },
   plugins: [
     new HtmlWebpackPlugin({
