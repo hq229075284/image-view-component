@@ -16,7 +16,9 @@ export default function DragSacle(Options: types.options) {
 
   const root = createRoot(options)
 
-  const scope = <HTMLElement>root.children[1]
+  const outerScope = <HTMLElement>root.children[1]
+
+  const list = <HTMLElement>outerScope.children[0]
 
   const touchEvent = new _TouchEvent(options)
 
@@ -28,10 +30,10 @@ export default function DragSacle(Options: types.options) {
 
   const click = (e: TouchEvent) => !store.get('animate') && touchEvent.touchend(e, { ...options, clicked: true })
 
-  scope.addEventListener('click', click)
-  scope.addEventListener('touchstart', touchEvent.touchstart)
-  scope.addEventListener('touchmove', touchmove)
-  scope.addEventListener('touchend', touchend)
+  outerScope.addEventListener('click', click)
+  outerScope.addEventListener('touchstart', touchEvent.touchstart)
+  outerScope.addEventListener('touchmove', touchmove)
+  outerScope.addEventListener('touchend', touchend)
 
   return {
     delete() {
@@ -39,17 +41,17 @@ export default function DragSacle(Options: types.options) {
       document.body.removeChild(root)
     },
     removeListener: () => {
-      scope.removeEventListener('touchstart', touchEvent.touchstart)
-      scope.removeEventListener('touchmove', touchmove)
-      scope.removeEventListener('touchend', touchend)
-      scope.removeEventListener('click', click)
+      outerScope.removeEventListener('touchstart', touchEvent.touchstart)
+      outerScope.removeEventListener('touchmove', touchmove)
+      outerScope.removeEventListener('touchend', touchend)
+      outerScope.removeEventListener('click', click)
     },
     show: (showIndex: number | string) => {
       store.set('showIndex', showIndex)
       document.body.addEventListener('touchmove', onBodyTouchMove, { passive: false })
-      const cb1 = resetScopeStyle(scope, options)
-      const cb2 = resetListStyle(scope.children[0] as HTMLElement, options)
-      const cb3 = resetItemStyle(scope.children[0].children, options)
+      const cb1 = resetScopeStyle(outerScope, options)
+      const cb2 = resetListStyle(list, options)
+      const cb3 = resetItemStyle(list.children, options)
       store.set('animate', true)
       setTimeout(() => {
         cb1.forEach(fn => fn())

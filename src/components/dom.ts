@@ -8,17 +8,21 @@ export function createRoot(options: types.options): HTMLElement {
   const shadow = document.createElement('div')
   shadow.classList.add('shadow')
   div.append(shadow)
-  const scope = document.createElement('div')
-  scope.classList.add('scope')
+  const outerScope = document.createElement('div')
+  outerScope.classList.add('outer-scope')
   const list = document.createElement('div')
   list.classList.add('list')
   options.targets.forEach(() => {
-    const item = document.createElement('div')
-    item.classList.add('item')
-    list.append(item)
+    const img = document.createElement('div')
+    img.classList.add('item')
+    img.classList.add('maybe-scale')
+    const innerScope = document.createElement('div')
+    innerScope.classList.add('inner-scope')
+    innerScope.append(img)
+    list.append(innerScope)
   })
-  scope.append(list)
-  div.append(scope)
+  outerScope.append(list)
+  div.append(outerScope)
   document.body.append(div)
   dom = div
   return dom
@@ -52,12 +56,12 @@ export function resetScopeStyle(scope: HTMLElement, options: types.options) {
   }]
 }
 
-export function resetItemStyle(items: HTMLCollection, options: types.options) {
+export function resetItemStyle(innerScopes: HTMLCollection, options: types.options) {
   const { store, urls } = options
   let { width } = document.body.getClientRects()[0]
   const cbs = []
-  for (let i = 0; i < items.length; i++) {
-    const item = <HTMLElement>items[i]
+  for (let i = 0; i < innerScopes.length; i++) {
+    const item = <HTMLElement>innerScopes[i].children[0]
     item.style.width = `${store.get('scope width')}px`
     // item.style.height = `${height}px`
     item.style.backgroundSize = 'contain'
