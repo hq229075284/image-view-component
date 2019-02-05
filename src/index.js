@@ -1,5 +1,5 @@
 import './style.less'
-import D from './components/adapter'
+import { Adapter as D } from './components'
 import { createRoot } from './components/dom'
 import { Store } from './components/store'
 // import D from '../dist/dragScale'
@@ -36,8 +36,8 @@ target2.style.backgroundImage = `url(${height_pic})`
 // })
 const t = new D(
   {
-    targets: [target1, target2],
-    urls: [width_pic, height_pic],
+    targets: [target1],
+    urls: [width_pic],
     thresholdX: 30,
     thresholdY: 30,
   }

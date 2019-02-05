@@ -12,10 +12,11 @@ export function createRoot(options: types.options): HTMLElement {
   outerScope.classList.add('outer-scope')
   const list = document.createElement('div')
   list.classList.add('list')
-  options.targets.forEach(() => {
-    const img = document.createElement('div')
+  options.urls.forEach((url) => {
+    const img = document.createElement('img')
     img.classList.add('item')
     img.classList.add('maybe-scale')
+    img.src = url
     const innerScope = document.createElement('div')
     innerScope.classList.add('inner-scope')
     innerScope.append(img)

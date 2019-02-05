@@ -11,6 +11,7 @@ export declare interface options {
   urls: string[]
   clicked?: boolean
   store?: store
+  imgInfos: ({ width: number, height: number })[]
   // showIndex: number
 }
 

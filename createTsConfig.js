@@ -4,7 +4,7 @@ const config = {
   "compilerOptions": {
     // "allowJs": true,
     // "checkJs": true,
-    "target": "es5",
+    "target": "es6",
     experimentalDecorators: true,//启用实验性的ES装饰器。
     extendedDiagnostics: true,// 显示详细的诊段信息。
     isolatedModules: true,// 将每个文件作为单独的模块
