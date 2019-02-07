@@ -28,20 +28,20 @@ const height_pic = 'http://f.hiphotos.baidu.com/image/pic/item/7c1ed21b0ef41bd5f
 target1.style.backgroundImage = `url(${width_pic})`
 target2.style.backgroundImage = `url(${height_pic})`
 
-// const t = D({
-//   targets: [target1, target2],
-//   urls: [width_pic, height_pic],
-//   thresholdX: 30,
-//   thresholdY: 30,
-// })
-const t = new D(
-  {
-    targets: [target1],
-    urls: [width_pic],
-    thresholdX: 30,
-    thresholdY: 30,
-  }
-)
+const t = new D({
+  targets: [target1, target2],
+  urls: [width_pic, height_pic],
+  thresholdX: 30,
+  thresholdY: 30,
+})
+// const t = new D(
+//   {
+//     targets: [target1],
+//     urls: [width_pic],
+//     thresholdX: 30,
+//     thresholdY: 30,
+//   }
+// )
 
 target1.addEventListener('click', function () {
   t.show(0)

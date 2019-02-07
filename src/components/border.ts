@@ -11,10 +11,11 @@ export class Border {
   root: HTMLElement
   options: types.options
   constructor(dom: HTMLElement, options: types.options) {
-    this.dom = dom
     this.root = dom.parentNode as HTMLElement
     this.shadow = this.root.querySelector('.shadow')
+    this.dom = dom
     this.options = options
+    this.shadow.style.transition = transition
     this.dom.style.transition = transition
   }
   changeStyle(target: HTMLElement, styles: key_value) {
@@ -23,10 +24,11 @@ export class Border {
   zoomIn(from: types.rect, to: types.rect) {
     const { width: x1, height: y1, left: l1, top: t1 } = from
     const { width: x2, height: y2, left: l2, top: t2 } = to
-    this.changeStyle(this.dom, { width: x1 + 'px', height: y1 + 'px', left: l1 + 'px', top: t1 + "px" })
     this.changeStyle(this.root, { display: 'block' })
-    this.changeStyle(this.shadow, { backgroundColor: `rgba(0,0,0,${1})` })
+    this.changeStyle(this.shadow, { backgroundColor: `rgba(0,0,0,0)` })
+    this.changeStyle(this.dom, { width: x1 + 'px', height: y1 + 'px', left: l1 + 'px', top: t1 + "px" })
     window.requestAnimationFrame(() => {
+      this.changeStyle(this.shadow, { backgroundColor: `rgba(0,0,0,1)` })
       this.changeStyle(this.dom, { width: x2 + 'px', height: y2 + 'px', left: l2 + 'px', top: t2 + "px" })
     })
   }
@@ -69,7 +71,7 @@ export class Border {
   }
   scaleEnd() {
     this.changeStyle(this.dom, { transition })
-    if (this.zoom < 0.5) {
+    if (this.zoom < this.options.zoomOutThreshold) {
       this.changeStyle(this.dom, { transform: `scale(${1})` })
       const showIndex = this.options.store.get('showIndex')
       this.zoomOut(this.options.targets[showIndex].getClientRects()[0])

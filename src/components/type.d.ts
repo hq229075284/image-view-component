@@ -9,9 +9,10 @@ export declare interface options {
   thresholdX: number
   thresholdY: number
   urls: string[]
-  clicked?: boolean
+  // clicked?: boolean
   store?: store
   imgInfos: ({ width: number, height: number })[]
+  zoomOutThreshold: number
   // showIndex: number
 }
 

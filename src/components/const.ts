@@ -47,3 +47,12 @@ export function calcDiagonalDistance(position: { x1: number, x2: number, y1: num
   const { x1, x2, y1, y2 } = position
   return Math.sqrt(Math.abs(x1 - x2) ** 2 + Math.abs(y1 - y2) ** 2)
 }
+
+export const defaultOptions: types.options = {
+  targets: [],
+  thresholdX: 30,
+  thresholdY: 30,
+  urls: [],
+  imgInfos: [],
+  zoomOutThreshold: 0.6
+}
