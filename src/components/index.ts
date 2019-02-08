@@ -24,11 +24,16 @@ export class Adapter {
       }
     })
   }
+  preventDefault(e: TouchEvent) { e.preventDefault() }
   show(showIndex: number) {
     const { store } = this.options
     store.set('showIndex', showIndex)
 
+
     const _show = () => {
+      // 禁止iOS的弹性滚动 微信的下拉回弹
+      document.body.addEventListener('touchmove', this.preventDefault, false);
+
       const from = this.options.targets[showIndex].getClientRects()[0]
       const to = document.body.getClientRects()[0]
       this.borderInstance.zoomIn(from, to)
@@ -53,7 +58,9 @@ export class Adapter {
         Promise.all(this.options.urls.map(this.getImgSize))
           .then((infos: types.rect[]) => this.options.imgInfos = infos)
           .then(_show)
-          .catch(() => { throw new Error('图片加载失败') })
+          .catch(() => {
+            throw new Error('图片加载失败')
+          })
       }
     } else {
       _show()
@@ -113,6 +120,7 @@ export class Adapter {
       this.borderInstance.zoomOut(to)
       this.listInstance.zoomOut(to)
       this.itemInstances.forEach(instance => instance.zoomOut(to))
+      document.body.removeEventListener('touchmove', this.preventDefault, false);
     } else if (this.isSlide) {
       this.isSlide = false
       this.listInstance.slideEnd()
@@ -123,6 +131,7 @@ export class Adapter {
         const to = this.options.targets[this.options.store.get('showIndex')].getClientRects()[0]
         this.listInstance.zoomOut(to)
         this.itemInstances.forEach(instance => instance.zoomOut(to))
+        document.body.removeEventListener('touchmove', this.preventDefault, false);
       }
     } else if (this.isImgZoom) {
       this.isImgZoom = false
@@ -145,5 +154,6 @@ export class Adapter {
     this.listInstance = null
     this.itemInstances = null
     document.body.removeChild(this.root)
+    document.body.removeEventListener('touchmove', this.preventDefault, false);
   }
 }
