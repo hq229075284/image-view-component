@@ -36,13 +36,14 @@ export class Border {
     // const { width: x2, height: y2, left: l2, top: t2 } = from
     const { width: x1, height: y1, left: l1, top: t1 } = to
     // this.changeStyle({ width: x2 + 'px', height: y2 + 'px', left: l2 + 'px', top: t2 + "px" })
-    window.requestAnimationFrame(() => {
-      this.changeStyle(this.dom, { width: x1 + 'px', height: y1 + 'px', left: l1 + 'px', top: t1 + "px" })
-      this.changeStyle(this.shadow, { backgroundColor: `rgba(0,0,0,${0})` })
-      setTimeout(() => {
-        this.changeStyle(this.root, { display: 'none' })
-      }, transitionDuration)
-    })
+    this.changeStyle(this.dom, { width: x1 + 'px', height: y1 + 'px', left: l1 + 'px', top: t1 + "px" })
+    this.changeStyle(this.shadow, { backgroundColor: `rgba(0,0,0,${0})` })
+    // const now = Date.now()
+    // console.log('zoomout', now)
+    setTimeout(() => {
+      // console.log('display:none for ', now)
+      this.changeStyle(this.root, { display: 'none' })
+    }, transitionDuration)
   }
   startX: number
   startY: number
@@ -53,6 +54,7 @@ export class Border {
     this.startX = clientX
     this.startY = clientY
     this.changeStyle(this.dom, { transition: 'none', tranformOrigin: `${clientX}px ${clientY}px` })
+    this.changeStyle(this.shadow, { transition: 'none' })
   }
   scale(e: TouchEvent) {
     const { touches } = e
@@ -71,6 +73,7 @@ export class Border {
   }
   scaleEnd() {
     this.changeStyle(this.dom, { transition })
+    this.changeStyle(this.shadow, { transition })
     if (this.zoom < this.options.zoomOutThreshold) {
       this.changeStyle(this.dom, { transform: `scale(${1})` })
       const showIndex = this.options.store.get('showIndex')
