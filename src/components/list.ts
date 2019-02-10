@@ -12,7 +12,7 @@ export class List {
   constructor(dom: HTMLElement, options: types.options) {
     this.dom = dom
     this.options = options
-    this.dom.style.transition = transition
+    // this.dom.style.transition = transition
     this.showIndex = this.options.store.get('showIndex')
   }
   changeStyle(styles: key_value) {
@@ -25,10 +25,10 @@ export class List {
     const store = this.options.store
     const showIndex = store.get('showIndex')
     let leftOffset = showIndex * x1
-    this.changeStyle({ width: n * x1 + 'px', left: -leftOffset + 'px' })
+    this.changeStyle({ width: n * x1 + 'px', left: -leftOffset + 'px', transition: 'none' })
     window.requestAnimationFrame(() => {
       leftOffset = showIndex * x2
-      this.changeStyle({ width: n * x2 + 'px', left: -leftOffset + 'px' })
+      this.changeStyle({ width: n * x2 + 'px', left: -leftOffset + 'px', transition })
     })
   }
   zoomOut(to: types.rect) {

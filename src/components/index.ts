@@ -37,6 +37,7 @@ export class Adapter {
       const from = this.options.targets[showIndex].getClientRects()[0]
       const to = document.body.getClientRects()[0]
       this.borderInstance.zoomIn(from, to)
+      this.borderInstance.bottom_description.textContent = `${this.listInstance.showIndex + 1}/${this.options.urls.length}`
       this.listInstance.zoomIn(from, to)
       this.itemInstances.forEach(instance => instance.zoomIn(from, to))
     }
@@ -71,9 +72,10 @@ export class Adapter {
   isSlide = false
   willClose = false
   isAction = () => this.isZoom || this.isSlide || this.isImgZoom || this.willClose
-  _startX: number
-  get startX() { return this._startX }
-  set startX(v) { console.log('v', v); this._startX = v }
+  // _startX: number
+  // get startX() { return this._startX }
+  // set startX(v) { console.log('v', v); this._startX = v }
+  startX: number
   startY: number
   imgZoomScale = 1
   touchstart = (e: TouchEvent) => {
@@ -177,6 +179,7 @@ export class Adapter {
       const prevShowIndex = this.listInstance.slideEnd()
       if (prevShowIndex !== undefined) {
         this.itemInstances[prevShowIndex].resetImg()
+        this.borderInstance.bottom_description.textContent = `${this.listInstance.showIndex + 1}/${this.options.urls.length}`
       }
     } else if (this.isZoom) {
       this.isZoom = false
@@ -199,6 +202,7 @@ export class Adapter {
       if (prevShowIndex !== undefined) {
         this.itemInstances[prevShowIndex].resetImg()
         this.imgZoomScale = 1
+        this.borderInstance.bottom_description.textContent = `${this.listInstance.showIndex + 1}/${this.options.urls.length}`
       }
     }
   }

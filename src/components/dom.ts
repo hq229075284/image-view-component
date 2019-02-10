@@ -8,6 +8,10 @@ export function createRoot(options: types.options): HTMLElement {
   const shadow = document.createElement('div')
   shadow.classList.add('shadow')
   div.append(shadow)
+  const top_description = document.createElement('div')
+  top_description.classList.add('top-description')
+  const bottom_description = document.createElement('div')
+  bottom_description.classList.add('bottom-description')
   const outerScope = document.createElement('div')
   outerScope.classList.add('outer-scope')
   const list = document.createElement('div')
@@ -24,6 +28,8 @@ export function createRoot(options: types.options): HTMLElement {
   })
   outerScope.append(list)
   div.append(outerScope)
+  div.append(top_description)
+  div.append(bottom_description)
   document.body.append(div)
   dom = div
   return dom

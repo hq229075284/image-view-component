@@ -2,7 +2,7 @@ import * as types from './type'
 
 export const transitionDuration: number = 300
 
-export const transition: string = `all ${transitionDuration}ms ease-out`
+export const transition: string = `all ${transitionDuration}ms linear`
 
 export function getNum(str: string) { return parseFloat(str.replace('px', '')) }
 

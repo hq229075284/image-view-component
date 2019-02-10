@@ -11,8 +11,9 @@
 //   }
 // }
 
-.drag-scale{display: none;position: absolute;left: 0;top: 0;height: 100%;width: 100%;
+.drag-scale{/* display: none; */position: absolute;left: 0;top: 0;height: 100%;width: 0;visibility: hidden;overflow:hidden;
   .shadow{background-color: rgba(0,0,0,1);position: absolute;top:0;bottom: 0;left: 0;right: 0; }
+  .top-description,.bottom-description{width: 100%;position: absolute;left:0;background-color: rgba(0,0,0,.3);height: 50px;color: #fff;}
   .outer-scope{position: absolute;overflow:hidden;width:100%;height:100%;
     .list{position: absolute;top:0;left:0;height: 100%;
       .inner-scope{height: 100%;float: left;position: relative;overflow: hidden;
@@ -24,6 +25,7 @@
   }
 }
 
+.drag-scale .bottom-description{font-size: 28px;text-align: center;line-height: 50px;}
 html,body{width: 100%;height: 100%;margin: 0;overflow: hidden;background-color: red;}
 .target1{width: 100px;height: 400px;display: inline-block;background-position: center;background-repeat: no-repeat;background-size: cover;}
 .target2{width: 200px;height: 400px;display: inline-block;background-position: center;background-repeat: no-repeat;background-size: cover;}
