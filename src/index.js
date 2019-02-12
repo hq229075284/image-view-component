@@ -1,10 +1,9 @@
 import './style.less'
 import { Adapter as D } from './components'
-import { createRoot } from './components/dom'
-import { Store } from './components/store'
+// import { createRoot } from './components/dom'
+// import { Store } from './components/store'
 // import D from '../dist/dragScale'
 
-const scope = document.querySelector('.scope')
 const target1 = document.querySelector('.target1')
 const target2 = document.querySelector('.target2')
 

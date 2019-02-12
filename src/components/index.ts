@@ -5,6 +5,7 @@ import { Item } from './item'
 import { Store } from './store'
 import { createRoot } from './dom'
 import { defaultOptions, transitionDuration } from './const'
+import './style.less'
 
 export class Adapter {
   options: types.options
@@ -27,12 +28,13 @@ export class Adapter {
   preventDefault(e: TouchEvent) { e.preventDefault() }
   show(showIndex: number) {
     const { store } = this.options
-    store.set('showIndex', showIndex)
-
 
     const _show = () => {
       // 禁止iOS的弹性滚动 微信的下拉回弹
       document.body.addEventListener('touchmove', this.preventDefault, { passive: false });
+
+      store.set('showIndex', showIndex)
+      this.listInstance.showIndex = showIndex
 
       const from = this.options.targets[showIndex].getClientRects()[0]
       const to = document.body.getClientRects()[0]
